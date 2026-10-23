@@ -445,8 +445,8 @@ const PAL={blue:'#176CB4',lime:'#AFE24D',pants:'#2A303A',waist:'#1F232A',line:'#
 const LOOKS={
   pak:{skin:'#F9BD9F',hair:'pak',hc:'#262529'},
   bu:{skin:'#F9C1A3',hair:'bu',hc:'#28232A',lashes:1,lip:'#CF6A5E'},
-  dika:{skin:'#EDB18E',hair:'dika',hc:'#2A2220',lanyard:1,watch:1,line:'#C9714F'},
-  pram:{skin:'#DDA27E',hair:'pram',hc:'#262529',vest:1,line:'#C06A4C'}
+  dika:{skin:'#EDB18E',hair:'dika',hc:'#2A2220',glasses:1,watch:1,line:'#C9714F'},
+  pram:{skin:'#DDA27E',hair:'pram',hc:'#262529',stache:1,line:'#C06A4C'}
 };
 /* ---- rambut ---- */
 function hairSVG(L){
@@ -460,9 +460,7 @@ function hairSVG(L){
         <path d="M244,100 C248,140 246,172 236,200 L228,198 C236,170 238,140 236,108 Z" fill="${c}"/>
         <rect x="214" y="62" width="20" height="8" rx="4" fill="${PAL.lime}" transform="rotate(28 224 66)"/>`};
     case'dika':return{front:`<path d="M123,122 L121,92 C112,64 122,40 142,32 L144,15 L160,26 L170,8 L184,23 L199,9 L208,27 C232,31 252,52 249,86 L247,122 L240,102 L230,106 L225,88 L212,99 L204,82 L190,97 L181,80 L168,96 L158,84 L146,100 L136,94 L130,106 Z" fill="${c}"/>`,back:''};
-    case'pram':return{front:`<path d="M122,104 C118,56 146,30 183,30 C220,30 248,56 244,104 L238,82 C226,70 206,66 183,66 C160,66 140,70 128,82 Z" fill="${c}"/>
-        <path d="M117,92 C117,42 148,16 183,16 C218,16 249,42 249,92 Z" fill="#FFC928"/><path d="M183,17 L183,90" stroke="#E5A800" stroke-width="7"/>
-        <rect x="108" y="84" width="150" height="14" rx="7" fill="#F2B300"/>`,back:''};
+    case'pram':return{front:`<path d="M123,122 L121,88 C116,50 146,24 184,24 C224,24 252,52 244,92 L243,122 L238,94 C234,78 220,68 202,64 C190,78 160,88 128,94 Z" fill="${c}"/>`,back:''};
   }
   return{front:'',back:''};
 }
@@ -513,6 +511,8 @@ function faceSVG(L){
     ${vg('brows',brows,`stroke="${B}" stroke-width="4.6" ${st}`)}
     <g class="eyes">${vg('eyev',eyes)}</g>
     <path d="M177.5,126 Q174.5,136 175.5,140.5 Q177.5,145 182.5,144.5" stroke="${ln}" stroke-width="3" ${st}/>
+    ${L.glasses?`<g class="specs" fill="rgba(255,255,255,.18)" stroke="#2B2F38" stroke-width="4.4" stroke-linejoin="round"><rect x="137" y="108" width="36" height="28" rx="10"/><rect x="190" y="108" width="36" height="28" rx="10"/><path d="M173,119 Q181.5,113 190,119 M137,116 L125,112 M226,116 L240,112" fill="none" stroke-linecap="round"/></g>`:''}
+    ${L.stache?`<path d="M163,152 Q172,145 181.5,150 Q191,145 200,152 Q192,156 181.5,154 Q171,156 163,152 Z" fill="${L.hc}"/>`:''}
     <g class="mouthWrap">${vg('mouth',mouths)}<g class="talkM"><g class="tkN"><path d="M170,157 Q181,155 193,157 Q194,171 181.5,172 Q169,171 170,157 Z" fill="${M}"/><ellipse cx="181.5" cy="167.5" rx="6.5" ry="3.6" fill="${PAL.tongue}"/></g><g class="tkS"><path d="M168,166 Q181,154 195,166 Q194,173 181.5,173 Q169,173 168,166 Z" fill="${M}"/></g></g></g>
     <g class="fx fx-sweat"><path class="drip" d="M246,92 q9,14 0,19 q-9,-5 0,-19z" fill="#8FD3F7"/><path class="drip d2" d="M122,82 q6,10 0,14 q-6,-4 0,-14z" fill="#8FD3F7"/></g>
     <g class="fx fx-vein" stroke="#E5484D" stroke-width="4.2" stroke-linecap="round" fill="none"><path d="M226,52 q5,6 12,2 M244,46 q-6,5 -2,12 M240,66 q-5,-6 -12,-2 M222,70 q6,-5 2,-12"/></g>
@@ -567,9 +567,7 @@ function armSVG(L,side,layer){
 function rigSVG(key,o={}){
   const L=LOOKS[key],sk=L.skin,hr=hairSVG(L);
   const torso='M142,204 C125,206 112,210 106,219 L104,452 Q183,459 262,452 L260,219 C254,210 241,206 223,204 Q182.5,268 142,204 Z';
-  const lan=L.lanyard?`<path d="M160,212 L176,300 M205,212 L189,300" stroke="#1F3B70" stroke-width="5" fill="none"/><rect x="167" y="296" width="31" height="40" rx="4" fill="#fff"/><rect x="167" y="296" width="31" height="10" rx="3" fill="${PAL.blue}"/><rect x="172" y="310" width="11" height="13" rx="2" fill="#C9D3E3"/><rect x="186" y="312" width="8" height="3" rx="1.5" fill="#9AA6BA"/><rect x="186" y="318" width="8" height="3" rx="1.5" fill="#9AA6BA"/>`:'';
-  const vest=L.vest?`<path d="M106,226 L146,212 L160,300 L150,452 L106,452 Z" fill="#FF8A1F"/><path d="M260,226 L220,212 L206,300 L216,452 L260,452 Z" fill="#FF8A1F"/><path d="M106,380 L156,380 L155,396 L106,396 Z M260,380 L211,380 L212,396 L260,396 Z" fill="#E8EDF3"/>`:'';
-  const spi=L.vest?'':`<text x="199" y="285" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-style="italic" font-size="26" letter-spacing="-.5" fill="#fff">SPI</text>`;
+  const spi=`<text x="199" y="285" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-style="italic" font-size="26" letter-spacing="-.5" fill="#fff">SPI</text>`;
   return`<svg class="rig ${o.cls||''}" data-k="${key}" viewBox="0 0 365 760" overflow="visible" xmlns="http://www.w3.org/2000/svg">
   <ellipse class="shadow" cx="182.5" cy="748" rx="96" ry="10" fill="rgba(20,28,48,.2)"/>
   <g class="body">
@@ -585,7 +583,7 @@ function rigSVG(key,o={}){
       <path d="M159,184 Q182.5,206 206,184 L206,198 Q182.5,214 159,198 Z" fill="#E59C80" opacity=".85"/>
       ${armSVG(L,'L','back')}${armSVG(L,'R','back')}<path class="torso" d="${torso}" fill="${PAL.blue}"/>
       <path d="M142.5,205 Q182.5,266 222.5,205" stroke="${PAL.lime}" stroke-width="9" fill="none" stroke-linecap="round"/>
-      ${vest}${spi}${lan}
+      ${spi}
       <g class="head" style="transform-origin:182px 196px">
         ${hr.back}
         <ellipse cx="115" cy="131" rx="12.5" ry="18" fill="${sk}"/><path d="M112,121 Q119,126 120,138" stroke="${L.line||PAL.line}" stroke-width="2.6" fill="none" stroke-linecap="round"/>
@@ -1226,7 +1224,7 @@ function tried(mk,opts){const T=S.tried[mk],i={m1:0,m2:1,m3:2}[mk],tg=S.target?(
 const full=()=>`${S.hon} ${S.name}`;
 function fmtS(t){return fmt(t).replace(/([.!?…]+)(<\/b>)? (?=(?:<b class="hl">)?[A-Z“"])/g,'$1$2<span class="sb"></span>');}
 function fmt(t){
-  t=t.replace(/\{H\}/g,S.hon).replace(/\{N\}/g,S.name).replace(/\{FULL\}/g,full());
+  t=t.replace(/\{H\}/g,S.hon).replace(/\{B\}/g,S.g==='pak'?'Bapak':'Ibu').replace(/\{N\}/g,S.name).replace(/\{FULL\}/g,full());
   return esc(t).replace(/\*\*(.+?)\*\*/g,'<b class="hl">$1</b>');
 }
 
@@ -1631,7 +1629,7 @@ function screenSelect(){
   return new Promise(res=>{
     const sc=h('div','screen','',L_ui);
     sc.innerHTML=`<div class="selTitle"><h2>Pilih Avatarmu</h2><p>Kamu akan berperan sebagai<br><b>Supervisor Logistik SPI</b></p></div>
-      <div class="avCards">${['pak','bu'].map(g=>`<button class="avCard" data-g="${g}"><span class="bgp"></span><span class="rigw">${rigSVG(g)}</span><span class="nm">${g==='pak'?'Pak':'Bu'}</span><span class="chk">${IC.checkInk}</span></button>`).join('')}</div>
+      <div class="avCards">${['pak','bu'].map(g=>`<button class="avCard" data-g="${g}"><span class="bgp"></span><span class="rigw">${rigSVG(g)}</span><span class="nm">${g==='pak'?'Bapak':'Ibu'}</span><span class="chk">${IC.checkInk}</span></button>`).join('')}</div>
       <div class="sBottom"><button class="btn lime" id="nx" disabled>Lanjut ▶</button></div>`;
     const rigs={};sc.querySelectorAll('.avCard').forEach(c=>{const r=new Rig(c.querySelector('svg'));r.pose('cheer').exp('neutral');rigs[c.dataset.g]=r;});
     anim(sc.querySelector('.selTitle'),[{opacity:0,transform:'translateY(-30px)'},{opacity:1,transform:'none'}],{duration:600,easing:EASE_SMOOTH});
@@ -1654,7 +1652,7 @@ function screenName(){
   return new Promise(res=>{
     const sc=h('div','screen','',L_ui);
     sc.innerHTML=`<button class="backLink">‹ Ganti avatar</button><div class="nameAv">${rigSVG(S.g)}</div>
-      <div class="nameCard"><div class="bridge"><span>🎬 GILIRANMU!</span>Di video, kita belajar banyak dari Pak Arif. Sekarang, <b>kamu yang jadi Pak Arif</b>. Ternyata pilihannya banyak, lho 😉</div><h3>Siapa namamu?</h3><div class="hint">Dika akan memanggilmu dengan nama ini.</div>
+      <div class="nameCard"><div class="bridge"><span>🎬 GILIRANMU!</span>Di video, kita belajar banyak dari Pak Arif. Sekarang, <b>kamu yang ada di posisi Pak Arif</b>. Ternyata pilihannya banyak, lho 😉</div><h3>Siapa namamu?</h3><div class="hint">Dika akan memanggilmu dengan nama ini.</div>
       <div class="nmRow"><span class="pre">${S.hon}</span><input id="nm" maxlength="14" autocomplete="off" autocapitalize="words" placeholder="Nama panggilan" enterkeyhint="go"></div>
       <div class="preview"></div><button class="btn lime" id="go" disabled>Mulai Shift ▶</button></div>`;
     const r=new Rig(sc.querySelector('.nameAv svg'));r.pose('wave').exp('joy');
@@ -1905,7 +1903,7 @@ async function ch2(){
   await say('think','Duh... tapi gimana kalau Member tahu, terus minta retur?',{e:'doubt',avExp:'doubt'});
   await say('think','Kalau sampai ada tolakan, yang kena gue juga...',{e:'guilty',avExp:'guilty'});
   if(S.m1==='good'){
-    await say('think','Besok pagi ngomong aja deh ke {FULL}. Kemarin aja dia mau ngobrol enak.',{e:'relieved',avExp:'relieved'});
+    await say('think','Besok pagi ngomong aja deh ke {FULL}. Kemarin enak kok diajak ngobrol.',{e:'relieved',avExp:'relieved'});
   }else{
     await say('think','Ngaku nggak, ya... Ah, liat besok aja deh.',{e:'awkward',avExp:'awkward'});
   }
@@ -1943,7 +1941,7 @@ async function ch3(){
   const D=new Actor('dika','R',{exp:'nervous',pose:'shy',hidden:true});
   await D.enter('right',1100);
   AudioSys.setMood('tense');
-  await say('dika','{FULL}... ada waktu sebentar?',{e:'nervous',p:'shy'});
+  await say('dika','{FULL}... {B} ada waktu sebentar?',{e:'nervous',p:'shy'});
   await say('me','Boleh, Ka. Ada apa?',{e:'neutral',p:'idle'});
   if(S.m1==='good'){
     await say('dika','Saya... mau ngaku salah, {H}.',{e:'scared',p:'shy'});
@@ -1963,7 +1961,7 @@ async function ch3(){
     anim(g,[{opacity:0,transform:'translateY(-30px)'},{opacity:1,transform:'none'}],{duration:500,easing:EASE_SPRING});
     const R=[
       ['Ka, tunggu dulu. Kayaknya ada yang mau kamu omongin.','Beneran nggak papa kok, {H}...','awkward','scratch'],
-      ['Dari tadi kamu gelisah gitu. Cerita aja.','Ng... nanti {H} marah...','scared','shy'],
+      ['Dari tadi kamu gelisah gitu. Cerita aja.','Ng... nanti {B} marah...','scared','shy'],
       ['Saya dengerin dulu. Ayo, Ka.','...Oke, {H}.','guilty','shy']
     ];
     for(let i=0;i<3;i++){
@@ -2000,7 +1998,7 @@ async function ch3(){
     await pramCameo();
     await say('me','Untung belum serah terima. Ini fatal lho, kalau Member sampai komplain.',{e:'firm',p:'hip'});
     await say('me','Jangan keulang, ya. Nunggu anak picking tuker barang itu nggak lama, kok.',{e:'caring',p:'chest'});
-    await say('dika','Iya, {H}. Maaf... makasih udah **dengerin saya dulu**.',{e:'relieved',p:'shy'});
+    await say('dika','Iya, {H}. Maaf... makasih {B} udah **dengerin saya dulu**.',{e:'relieved',p:'shy'});
     await impactCard({k:'aman',good:true,face:'grateful',status:'Aman buat jujur',
       quote:S.forced?'Untung tadi akhirnya cerita. Ternyata nggak seseram yang dibayangin.':'Ngaku salah ternyata aman. Lain kali ada masalah, langsung lapor aja.',
       take:S.forced?'Kamu cari penyebab dulu & fokus ke solusi. Tapi ingat: kalau rasa aman dibangun **dari awal**, Dika nggak perlu dibujuk buat jujur.':'Leader yang **cari tahu dulu** dan **fokus ke solusi** bikin tim berani bertanya, mengaku salah, dan kasih ide.'});
@@ -2069,7 +2067,7 @@ async function ch4(){
     await say('dika','Iya nih, {H}. Abis istirahat siang tadi, badan rasanya nggak enak.',{e:'tired',p:'rub'});
     await say('me','Jaga kesehatan, lho. Besok kamu off, kan? Istirahat, ya.',{e:'soft',p:'idle'});
     D.rig.flag('slump',0);
-    await say('dika','Siap, {H}. Makasih udah nanya...',{e:'tiredSmile',p:'idle'});
+    await say('dika','Siap, {H}. Makasih {B} udah nanya...',{e:'tiredSmile',p:'idle'});
     await impactCard({k:'hadir',good:true,face:'tiredSmile',status:'Merasa diperhatikan',quote:'Diperhatiin gini, rasanya lebih ringan.',
       take:'Leader memang nggak bisa ngatur energi tim. Tapi dengan **peka dan bertanya**, kamu bisa jaga energi & perhatian mereka tetap optimal.'});
   }else{
@@ -2088,7 +2086,7 @@ async function ch4(){
     await say('think','Badan nggak enak... tapi ya udahlah. **Nggak ada yang nanya** juga.',{avExp:'gloom'});
     killEl(er);await closeDlg();
     await fadeOut(600);await sleep(300);await fadeIn(400);
-    await phoneNotif('Dika','Scanner','{H}, maaf... hari ini saya izin sakit dulu ya. Badan drop 🙏','Keesokan pagi · 06.12');
+    await phoneNotif('Dika','Scanner','Pagi, {B}. Mohon maaf, hari ini saya izin sakit dulu. Badan drop 🙏','Keesokan pagi · 06.12');
     await impactCard({k:'hadir',good:false,face:'tired',status:'Energi habis',quote:'Nggak ada yang nyadar saya lagi drop.',
       take:'Energi Dika sudah habis. Tanpa ada yang **peka**, kerjaannya ikut keganggu dan dia makin drop.'});
   }
@@ -2148,7 +2146,7 @@ const ENDINGS={
       ['dika','Masa sih, {H}? Kayaknya bukan dari saya deh.',{e:'awkward',p:'scratch'}],
       ['think','Yang penting gajian. **Ngaku juga ntar kena.**',{e:'meh',avExp:'meh'}]],
     sum:'Badannya hadir, tapi **hatinya nggak**. Kerja cuma rutinitas, dan kesalahan memilih ditutupi.'},
-  BBB:{tease:'Apa yang terjadi kalau **ketiga momen** itu kamu lewatkan?',fin:['sad','idle','gloom','bag'],title:'Satu per Satu Menjauh',face:'gloom',d:['gloom','bag'],
+  BBB:{tease:'Apa yang terjadi kalau **ketiga momen** itu kamu lewatkan?',fin:['sad','idle','gloom','bag'],title:'Dika Menjadi Disengaged',face:'gloom',d:['gloom','bag'],
     lines:[['nar','Seminggu kemudian, Dika minta waktu bicara.'],
       ['dika','{H}... saya kepikiran buat **resign**.',{e:'gloom',p:'bag'}],
       ['me','Lho... kenapa, Ka?',{e:'shock',p:'idle'}],
@@ -2204,25 +2202,26 @@ async function epilog(key,hitTarget){
   return isNew;
 }
 async function moral(){
+  // Closing statement disampaikan Dika, dari sudut pandang tim
   await fadeOut(800,'#FFFFFF');
   clearActors();clearUI();hudShow(false);
   setTod('day');dof(true);vig('on');showWorldDika(false);
   Cam.tw=null;Cam.set({s:1.7,cx:400,cy:560,fgOp:0});
   AudioSys.setMood('end');
-  const M=new Actor('me','close',{rig:S.g,exp:'soft',pose:'idle'});
+  const D=new Actor('dika','close',{exp:'soft',pose:'idle'});
   await fadeIn(900);
-  await say('me','Engagement tim itu dipengaruhi banyak hal. **Nggak semuanya bisa kita kontrol.**',{e:'soft',p:'idle',big:true});
-  await say('me','Tugas kita sebagai leader **bukan** bikin semua orang selalu engaged atau terhubung.',{e:'neutral',p:'present',big:true});
-  await say('me','Yang bisa kita lakukan adalah **menciptakan situasi kerja yang kondusif**.',{e:'soft',p:'chest',big:true});
-  let chips=null;
-  await say('me','Dengan begitu, tim bisa memiliki **rasa aman**, bisa **hadir sepenuhnya**, dan merasa **pekerjaannya bermakna**.',{e:'joy',p:'hip',big:true,onShow:async()=>{
-    chips=h('div','chips3',[['aman','Rasa Aman'],['hadir','Hadir Sepenuhnya'],['makna','Pekerjaan Bermakna']].map(([k,t])=>`<span>${CONCEPT[k].icon}${t}</span>`).join(''),L_fx);
-    [...chips.children].forEach((c,i)=>anim(c,[{opacity:0,transform:'translateY(30px) scale(.7)'},{opacity:1,transform:'none'}],{duration:600,delay:900+i*450,easing:EASE_SPRING,fill:'backwards'}));
-    setTimeout(()=>SFX.sparkle(),900);
-  }});
+  await say('dika','{FULL}, dari sisi kami sebagai tim, engagement itu dipengaruhi banyak hal. **Nggak semuanya bisa {B} kontrol.**',{e:'soft',p:'idle',big:true});
+  await say('dika','Jadi, tugas leader **bukan** bikin kami selalu engaged.',{e:'neutral',p:'present',big:true});
+  await say('dika','Tugas leader adalah **menciptakan situasi kerja yang kondusif** buat kami.',{e:'soft',p:'chest',big:true});
+  const chips=h('div','chips3','',L_fx);
+  const chip=(k,t)=>()=>{const c=h('span','',`${CONCEPT[k].icon}${t}`,chips);anim(c,[{opacity:0,transform:'translateY(30px) scale(.7)'},{opacity:1,transform:'none'}],{duration:600,delay:500,easing:EASE_SPRING,fill:'backwards'});setTimeout(()=>SFX.sparkle(),500);};
+  await say('dika','Saat diajak lihat **dampak kerjanya**, kami merasa pekerjaan kami **bermakna**.',{e:'aha',p:'present',big:true,onShow:chip('makna','Pekerjaan Bermakna')});
+  await say('dika','Saat salah tapi **didengar dulu**, kami merasa **aman** untuk jujur.',{e:'relieved',p:'chest',big:true,onShow:chip('aman','Rasa Aman')});
+  await say('dika','Saat lagi drop terus **ditanya kabarnya**, kami bisa **hadir sepenuhnya**.',{e:'caring',p:'idle',big:true,onShow:chip('hadir','Hadir Sepenuhnya')});
+  await say('dika','Situasi kayak gitu yang bikin kami **nyaman** dan **engaged**, {H}.',{e:'joy',p:'pump',big:true});
   await closeDlg();
-  if(chips)killEl(chips,400);
-  return M;
+  killEl(chips,400);
+  return D;
 }
 function pickPanel(hiMoment){
   return new Promise(res=>{
@@ -2242,8 +2241,8 @@ async function ending(){
   const prev=lastEnding;lastEnding=key;
   const isNew=await epilog(key,false);
   const E=ENDINGS[key],n=ORDER.indexOf(key)+1,best=key==='GGG';
-  let M;
-  if(!moralSeen){moralSeen=true;M=await moral();await M.moveTo('endL',900);}
+  let M,D=null;
+  if(!moralSeen){moralSeen=true;D=await moral();await D.moveTo('endR',900);M=new Actor('me','endL',{rig:S.g,exp:'neutral',pose:'idle'});await M.enter('left',800);}
   else{
     await fadeOut(600);clearActors();clearUI();hudShow(false);
     setTod('day');dof(true);showWorldDika(false);Cam.tw=null;Cam.set({s:1.7,cx:400,cy:560,fgOp:0});
@@ -2255,8 +2254,8 @@ async function ending(){
   vig(best?'':'on');
   const P=E.fin;
   M.exp(P[0]).pose(P[1]);
-  const D=new Actor('dika','endR',{exp:P[2],pose:P[3],hidden:true});if(E.slump)D.rig.flag('slump',1);
-  await D.enter('right',900);
+  if(D){D.exp(P[2]).pose(P[3]);if(E.slump)D.rig.flag('slump',1);}
+  else{D=new Actor('dika','endR',{exp:P[2],pose:P[3],hidden:true});if(E.slump)D.rig.flag('slump',1);await D.enter('right',900);}
   if(best){confetti(90);SFX.good();}else SFX.meh();
   const shade=h('div','endShade','',L_fx);anim(shade,[{opacity:0},{opacity:1}],{duration:700});
   const chg=prev&&prev!==key?` · berubah dari Ending ${ORDER.indexOf(prev)+1}`:'';
