@@ -2212,7 +2212,6 @@ async function moral(){
   const D=new Actor('dika','close',{exp:'soft',pose:'idle'});
   await fadeIn(900);
   await say('dika','{FULL}, dari sisi kami sebagai tim, engagement itu dipengaruhi banyak hal. **Nggak semuanya bisa {B} kontrol.**',{e:'soft',p:'idle',big:true});
-  await say('dika','Jadi, tugas leader **bukan** bikin kami selalu engaged.',{e:'neutral',p:'present',big:true});
   await say('dika','Tugas leader adalah **menciptakan situasi kerja yang kondusif** buat kami.',{e:'soft',p:'chest',big:true});
   const chips=h('div','chips3','',L_fx);
   const chip=(k,t)=>()=>{const c=h('span','',`${CONCEPT[k].icon}${t}`,chips);anim(c,[{opacity:0,transform:'translateY(30px) scale(.7)'},{opacity:1,transform:'none'}],{duration:600,delay:500,easing:EASE_SPRING,fill:'backwards'});setTimeout(()=>SFX.sparkle(),500);};
