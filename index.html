@@ -411,6 +411,7 @@ input{-webkit-user-select:text;user-select:text;font-family:inherit}
 .bridge{background:linear-gradient(135deg,#EAF2FF,#EEF9DD);border-radius:22px;padding:16px 20px;margin-bottom:20px;font:600 23px/1.45 var(--fn);color:#3B4560}
 .bridge span{display:block;font:800 17px var(--fd);color:var(--blue);letter-spacing:1.5px;margin-bottom:4px}
 .bridge b{font-weight:800;color:var(--ink)}
+.bridge.end{margin:14px 0 0;padding:12px 18px;font-size:21px;text-align:center}.bridge.end span{font-size:15px}
 
 </style>
 </head>
@@ -1652,7 +1653,7 @@ function screenName(){
   return new Promise(res=>{
     const sc=h('div','screen','',L_ui);
     sc.innerHTML=`<button class="backLink">‹ Ganti avatar</button><div class="nameAv">${rigSVG(S.g)}</div>
-      <div class="nameCard"><div class="bridge"><span>🎬 GILIRANMU!</span>Di video, kita belajar banyak dari Pak Arif. Sekarang, <b>kamu yang ada di posisi Pak Arif</b>. Ternyata pilihannya banyak, lho 😉</div><h3>Siapa namamu?</h3><div class="hint">Dika akan memanggilmu dengan nama ini.</div>
+      <div class="nameCard"><h3>Siapa namamu?</h3><div class="hint">Dika akan memanggilmu dengan nama ini.</div>
       <div class="nmRow"><span class="pre">${S.hon}</span><input id="nm" maxlength="14" autocomplete="off" autocapitalize="words" placeholder="Nama panggilan" enterkeyhint="go"></div>
       <div class="preview"></div><button class="btn lime" id="go" disabled>Mulai Shift ▶</button></div>`;
     const r=new Rig(sc.querySelector('.nameAv svg'));r.pose('wave').exp('joy');
@@ -2273,6 +2274,7 @@ async function ending(){
   const pnl=h('div','endPanel',`<div class="hook"><div class="hq">${sug?'🔁 AYO PERBAIKI!':'🤔 PENASARAN?'}</div><p>${fmt(hookTxt)}</p></div>
     <div class="drows">${rows}</div>
     <div class="gal"><div class="gt">Koleksi ending: <b>${FOUND.size}/8</b>${left?` · masih ada <b>${left}</b> lagi`:' · lengkap! 🎉'}</div><div class="tiles">${tiles}</div></div>
+    <div class="bridge end"><span>🎬 LANJUT KE VIDEO</span>Kamu baru jadi Pak Arif. Yuk tonton videonya, lihat <b>Pak Arif asli</b> menghadapi Dika!</div>
     <div class="links"><button id="again">↺ Main dari awal</button></div>`,L_ui);
   anim(pnl,[{opacity:0,transform:'translateY(120px)'},{opacity:1,transform:'none'}],{duration:800,delay:300,easing:EASE_SPRING,fill:'backwards'});
   [...pnl.querySelectorAll('.drow')].forEach((e,i)=>anim(e,[{opacity:0,transform:'translateX(-30px)'},{opacity:1,transform:'none'}],{duration:450,delay:600+i*120,easing:EASE_SMOOTH,fill:'backwards'}));
